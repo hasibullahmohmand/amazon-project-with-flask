@@ -8,10 +8,7 @@
     right: 0;
     left: 0;
     z-index: 2;
-<<<<<<< HEAD
-=======
     min-width: 300px;
->>>>>>> 6086d61 (bug fixes)
 }
 
 .left-header{
@@ -47,6 +44,7 @@
 
 .search-bar{
     border: none;
+    min-width: 50px;
     border-radius: 4px;
     height: 37px;
     padding-left: 10px;

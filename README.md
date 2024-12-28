@@ -6,25 +6,45 @@ i have host the website with Render. You can check the website from here https:/
 
 ## Screenshots
 
-| Screenshot 1 | Screenshot 2 | Screenshot 3 |
-|--------------|--------------|--------------|
-| ![Screenshot 1](screenshots/1.png) | ![Screenshot 2](screenshots/2.png) | ![Screenshot 3](screenshots/3.png) |
+# Project Title
 
-| Screenshot 4 | Screenshot 5 | Screenshot 6 |
-|--------------|--------------|--------------|
-| ![Screenshot 4](screenshots/4.png) | ![Screenshot 5](screenshots/5.png) | ![Screenshot 6](screenshots/6.png) |
+## Screenshots
+| Screenshot 1 | 
+|--------------|
+![Screenshot 1](screenshots/1.png)
+| Main page |
 
-| Screenshot 7 | Screenshot 8 | Screenshot 9 |
-|--------------|--------------|--------------|
-| ![Screenshot 7](screenshots/7.png) | ![Screenshot 8](screenshots/8.png) | ![Screenshot 9](screenshots/9.png) |
+| Screenshot 2 | Screenshot 3 |
+|--------------|--------------|
+| ![Screenshot 2](screenshots/2.png) | ![Screenshot 3](screenshots/3.png) |
+| Login Page | Register Page |
 
-| Screenshot 10 | Screenshot 11 | Screenshot 12 |
-|---------------|---------------|---------------|
-| ![Screenshot 10](screenshots/10.png) | ![Screenshot 11](screenshots/11.png) | ![Screenshot 12](screenshots/12.png) |
+| Screenshot 4 | Screenshot 5 |
+|--------------|--------------|
+| ![Screenshot 4](screenshots/4.png) | ![Screenshot 5](screenshots/5.png) |
+| Validations in Register Page | Validations in Login Page |
 
-| Screenshot 13 |
-|---------------|
-| ![Screenshot 13](screenshots/13.png) |
+| Screenshot 6 | Screenshot 7 |
+|--------------|--------------|
+| ![Screenshot 6](screenshots/6.png) | ![Screenshot 7](screenshots/7.png) |
+| User Loged in | Searching in searchbar  |
+
+| Screenshot 8 | Screenshot 9 |
+|--------------|--------------|
+| ![Screenshot 8](screenshots/8.png) | ![Screenshot 9](screenshots/9.png) |
+| Added products in Cart Page | Ordered products in Order Page |
+
+| Screenshot 10 | Screenshot 11 |
+|--------------|---------------|
+| ![Screenshot 10](screenshots/10.png) | ![Screenshot 11](screenshots/11.png) |
+| Product before updating in Cart Page | Product after updating in Cart Page |
+
+| Screenshot 12 | Screenshot 13 |
+|---------------|---------------|
+| ![Screenshot 12](screenshots/12.png) | ![Screenshot 13](screenshots/13.png) |
+| Deleteing product from Cart Page | Main page after Logout |
+
+
 
 ---
 
@@ -78,7 +98,7 @@ To run this project, you need the following dependencies installed:
 5. **Set Up the Database:**
    - If using SQLite set the `DATABASE_URL` in the `.env` file:
      ```plaintext
-     DATABASE_URL=sqlite:///<database_name>
+     DATABASE_URL=sqlite:///product.db
      ```
 
 6. **Run the Application:**
