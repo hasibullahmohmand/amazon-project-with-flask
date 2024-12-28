@@ -174,7 +174,7 @@ def register_page():
                 flash("An error accured while registiring: Passwords are not mataching!", category="danger")
             else:
                 flash(f"An error accured while registiring: {error[0]}", category="danger")
-    return render_template("register.html", form=form)
+    return render_template("register.html", form=form, cart_items_count=cart_item_count())
 
 @app.route("/login", methods=['GET','POST'])
 def login_page():
