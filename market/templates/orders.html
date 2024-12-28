@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block title %}
+Returns & Orders
+{% endblock title %}
+
+{% block css %}
+{{url_for('static', filename='orders.css')}}
+{% endblock css %}
+
+{% block content %}
+{% if items %}
+<div class="your-orders">
+Your Orders
+</div>
+{% else %}
+<div class="your-orders">
+    No orders yet!!
+</div>
+{% endif %}
+<div class="main-container">
+    {% for item in items %}
+        <div class="product-container">
+            <div  class="order-placed">
+                <div>
+                    <b>Order Placed:</b>
+                    {{ item.order_date.strftime('%b %d') }}
+                </div>
+                <div>
+                    <b>Total:</b>
+                    
+                    ${{'%.2f' | format((item.total_price + item.shipping_cost)/100.0) }}
+                </div>
+                <div>
+                    <b>Order ID:</b>
+                    {{item.id}}
+                </div>
+            </div>
+            <div class="product">
+                <div class="product-image">
+                    <img src="{{ item.image }}">
+                </div>
+                <div class="product-details">
+                    <div>
+                        <b> {{ item.product_name }} </b>
+                    </div>
+                    <div>
+                        <div>
+                            Arriving on: {{ item.delivery_date.strftime('%b %d') }}
+                        </div>
+                        <div>
+                            Quantity: {{ item.quantity }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form class="buttons" method="POST">
+                <button class="buy-again-button" type="submit" name="action" value="buy-agian">
+                    <input type="hidden" name="id" value="{{item.product_id}}">
+                    <img src="{{url_for('static',filename='/images/buy-again.png')}}" class="buy-again-icon">
+                    <div>
+                        Buy it Agian
+                    </div>
+                </button>
+                <button class="track-order-button" type="submit" name="action" value="track">
+                    Track Order
+                </button>
+            </form>
+        </div>
+    {% endfor %}
+<div>
+{% endblock content %}

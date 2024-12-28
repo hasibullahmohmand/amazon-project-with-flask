@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}
+Amazon Project
+{% endblock title %}
+
+{% block css %}
+{{url_for('static', filename='index.css')}}
+{% endblock css %}
+
+{% block content %}
+<div class="main-contianer">
+{% for product in products%}
+
+<div class="product">
+    <div class="product-image">
+        <img src="{{product.image}}" alt="">
+    </div>
+    <div class="product-name">{{ product.product_name }}</div>
+    <div class="product-rating">
+        <img src="{{url_for('static',filename='/images/')}}rating-{{product.rating}}.png" class="product-rating-star">
+        {{ product.review_count }}
+    </div>
+    <div class="product-price">${{ "%.2f" | format(product.selling_price / 100.0) }}</div>
+    <form method="POST"> 
+        {{ form.hidden_tag() }}
+        <select name="quantity-selector" id="quantity-selector">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+        </select>
+        <div class="added">
+            <img src="{{url_for('static',filename='/images/checkmark.png')}}" class="checkmark-image">
+            Added
+        </div>
+        <input type="hidden" name="id" value="{{product.uniq_id}}">
+        {{ form.submit(class="add-to-cart-button") }}
+    </form>
+</div>
+
+{% endfor %}
+</div>
+<div class="pagination">
+    {% if pagination.has_prev %}
+        <a href="{{ url_for('main_page', page=pagination.prev_num) }}" class="pagination-link"><button class="pagination-button previous-button">Previous</button></a>
+    {% endif %}
+    
+    <span>Page {{ pagination.page }} of {{ pagination.pages }}</span>
+
+    {% if pagination.has_next %}
+        <a href="{{ url_for('main_page', page=pagination.next_num) }}" class="pagination-link"><button class="pagination-button next-button">Next</button></a>
+    {% endif %}
+</div>
+
+{% endblock content %}

@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block title %}
+Login Page
+{% endblock title %}
+
+{% block css %}
+{{url_for('static', filename='login.css')}}
+{% endblock css %}
+{% block content %}
+<div class="heading">Login</div>
+<div class='form-container'>
+    <form method="POST">
+    {{ form.hidden_tag() }}
+    {{ form.username.label() }}
+    {{ form.username(class="form-input", placeholder="Enter Your Username") }}
+    {{ form.password.label() }}
+    {{ form.password(class="form-input", placeholder="Enter Your Password") }}
+    <div>Do not have an account? <a href="{{url_for('register_page')}}">Create an account</a></div>
+    {{ form.submit(class="submit-button") }}
+
+</form>
+</div>
+{% endblock content %}

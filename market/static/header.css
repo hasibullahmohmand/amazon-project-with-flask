@@ -1,0 +1,132 @@
+.header{
+    display: flex;
+    height: 60px;
+    justify-content: space-between;
+    background-color: black;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
+<<<<<<< HEAD
+=======
+    min-width: 300px;
+>>>>>>> 6086d61 (bug fixes)
+}
+
+.left-header{
+    padding-left: 5px;
+    padding-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    flex-shrink: 0;
+}
+
+.amazon-logo{
+    height: 30px;
+    width: auto;
+}
+
+.amazon-button{
+    height: 45px;
+    background-color: black;
+    border: 1px solid black;
+}
+
+.center-header{
+    flex: 1;
+    max-width: 800px;
+    height:60px;
+    display: grid;
+    grid-template-columns: 1fr 42px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.search-bar{
+    border: none;
+    border-radius: 4px;
+    height: 37px;
+    padding-left: 10px;
+    font-size: 16px;
+    z-index:2;
+}
+
+.search-button{
+    width: 42px;
+    height:39px;
+    border: none;
+    margin-left: -5px;
+    border-radius: 4px;
+    background-color: rgb(237, 198, 100);
+}
+
+.search-icon{
+    height: 22px;
+    width: auto;
+    padding-top: 2px;
+}
+
+.right-header{
+    margin-left: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    padding-right: 10px;
+    flex-shrink: 0;
+
+}
+
+.returns-and-orders-button{
+    width: 73px;
+    height: 45px;
+    border: 1px solid black;
+    background-color: black;
+    color: white;
+    text-align: left;
+}
+
+.returns-and-orders-button:hover, 
+.cart-button:hover, 
+.amazon-button:hover,.login-button:hover{
+    border: 1px solid white;
+    border-radius:2px;
+    
+}
+
+.cart-button{
+    border: 1px solid black;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    background-color: black;
+    color: white;
+    position: relative;
+}
+
+.cart-icon{
+    height: 34px;
+    width: auto;
+}
+
+.number-of-products-in-cart{
+    position: absolute;
+    top: 6px;
+    left: 30px;
+    color: rgb(255, 153, 0);
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.login-button{
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+    height: 45px;
+    width: 55px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

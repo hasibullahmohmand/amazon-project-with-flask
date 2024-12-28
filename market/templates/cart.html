@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cart
+{% endblock title %}
+
+{% block css %}
+{{url_for('static', filename='cart.css')}}
+{% endblock css %}
+
+{% block content %}
+<div class="review">
+    Review your Order:
+</div>
+<div class="cart-contianer">
+    {% for item in items %}
+    <form  method="POST" class="product-contianer">
+        <div class="product-box">
+            <div class="delivery-date">
+                <b>Delivery Date: {{item.delivery_date.strftime('%b %d')}}</b>
+            </div>
+            <div class="product">
+                <div class="product-image">
+                    <img src="{{item.image}}">
+                </div>
+                <div class="product-details">
+                    <div class="product-name">
+                        {{item.product_name}}
+                    </div>
+                    <div class="product-price">
+                        ${{'%.2f' | format(item.selling_price/100.0)}}
+                    </div>
+                    <div class="quantity">
+                        Quantity: 
+                        <select name="quantity-selector" id="quantity-selector">
+                            {% for i in range(1, 10) %}
+                                <option value="{{ i }}" {% if i == item.quantity %}selected{% endif %}>{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <b>Choose a delivery option:</b>
+            <div>
+                <label>
+                    <input type="radio" name="option" value="0" checked> {{ (datetime.now().date()+timedelta(3)).strftime('%b %d') }}
+                </label>
+                <div class="delivery-option-div">
+                    FREE Shipping
+                </div>
+                
+                <label>
+                    <input type="radio" name="option" value="499"> {{ (datetime.now().date()+timedelta(2)).strftime('%b %d') }}
+                </label>
+                <div class="delivery-option-div">
+                    $4.99 - Shipping
+                </div>
+                
+                <label>
+                    <input type="radio" name="option" value="999"> {{ (datetime.now().date()+timedelta(1)).strftime('%b %d') }}
+                </label>
+                <div class="delivery-option-div">
+                    $9.99 - Shipping
+                </div>
+                <input type="hidden" name="product_id" value="{{ item.product_id }}">
+                <div class="update-delete-buttons">
+                    <!-- Regular HTML buttons with names and values -->
+                    <button type="submit" name="action" value="update" class="update-button">Update</button>
+                    <button type="submit" name="action" value="delete" class="delete-button">Delete</button>
+                </div>
+            </div>                        
+
+        </div>
+    </form>
+    {% endfor %}
+    {%set total = (items | sumT)%}
+    {%set total_tax = items | sumTT%}
+    {% set shipping = (items | sumShip) %}
+
+    <form class="order-summary-contianer"  method="POST">
+        {{ form.hidden_tag() }}
+        <div>
+            <b>Order sumary:</b>
+        </div>
+        <div class="summary-row">
+            <div>
+                Items({{items | length }}):
+            </div>
+            <div class="items-price">
+                ${{'%.2f' | format(total /100.0)}}
+            </div>
+        </div>
+        <div class="summary-row">
+            <div>
+                Shipping and Handling:
+            </div>
+            <div class="items-price">
+                ${{'%.2f' | format(shipping /100.0)}}
+            </div>
+        </div>
+        <div class="summary-row">
+            <div>
+                Total Before Tax:
+            </div>
+            <div class="items-price">
+                ${{'%.2f' | format((total+shipping) /100.0)}}
+            </div>
+        </div>
+        <div class="summary-row">
+            <div>
+                Estimated Tax:
+            </div>
+            <div class="items-price">
+                ${{'%.2f' | format((total_tax/100.0))}}
+            </div>
+        </div>
+        <div class="summary-row"> 
+            <div class="product-price">
+                Order Total:
+            </div>
+            <div class="items-price product-price">
+                ${{'%.2f' | format((total + total_tax + shipping) /100.0)}}
+            </div>
+        </div>
+        <div class="order-button">
+            
+            {{ form.submit(class="place-your-order-button") }}
+            
+        </div>
+    </form>
+</div>
+{% endblock content %}

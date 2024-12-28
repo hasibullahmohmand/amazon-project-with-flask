@@ -1,0 +1,135 @@
+.review{
+    font-weight: 600;
+    font-size: 20px;
+    margin: 20px 0px 20px 50px;
+}
+
+.cart-contianer{
+    display: grid;
+    grid-template-columns:1fr;
+    row-gap: 30px;
+    margin: 50px;
+    margin-top: 0;
+    justify-content: center;
+
+}
+
+.order-summary-contianer{
+    border: 1px solid rgb(218, 218, 218);
+    padding: 20px;
+}
+
+.summary-row{
+    display: grid;
+    grid-template-columns: 6fr 1fr;
+    margin-top: 10px;
+}
+
+.total-before-tax{
+    border-top: 1px solid  rgb(218, 218, 218);
+    padding-top: 6px;
+}
+
+.order-summary-contianer .product-price{
+    border-top: 1px solid rgb(218, 218, 218);
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.order-button{
+    display: flex;
+}
+
+.place-your-order-button{
+    background-color: gold;
+    flex: 1;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.place-your-order-button:hover, .update-button:hover, .delete-button:hover{
+    background-color: rgb(255, 200, 0);
+}
+
+.product-contianer{
+    display: grid;
+    border: 1px solid rgb(218, 218, 218);
+    padding: 20px;
+    order: 2;
+
+}
+
+@media (max-width:2000px) {
+    .product-contianer{
+        grid-template-columns:2fr 1fr;
+        column-gap: 25px
+    }
+}
+@media (max-width:1000px){
+    .product-contianer{
+        grid-template-columns:1fr;
+        row-gap: 20px;
+    }
+}
+ 
+
+.product-box .delivery-date{
+    font-size: large;
+    color: green;
+    margin-bottom: 20px;
+}
+
+.product{
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 20px;
+    
+
+}
+
+.product-name{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+ }
+
+.product-price{
+    color: red;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.product-image{
+    height: 130px;
+
+}
+
+.update-delete-buttons{
+    display: flex;
+    column-gap: 20px;
+    margin-top: 20px;
+}
+
+.update-button, .delete-button{
+    background-color: gold;
+    flex: 1;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.items-price{
+    display: grid;
+    justify-content: end;
+}
+
+#quantity-selector{
+    background-color: rgb(240, 240, 240);
+    height: 27px;
+    width: 50px;
+    border:1px solid rgb(189, 189, 189);
+    border-radius: 8px;
+    box-shadow: inset 2px 1px rgba(rgba(56, 22, 22, 0.589), green, blue, alpha);
+}
