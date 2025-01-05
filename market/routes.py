@@ -6,26 +6,23 @@ from flask_login import login_user, current_user, logout_user, login_required
 from sqlalchemy.orm import joinedload
 from datetime import datetime, timedelta
 
-with app.app_context():
-    products = Product.query.all()
-
     
 @app.route("/products/<page>/", methods=['GET','POST'])
 @app.route('/search', methods=['GET','POST'])
 @app.route("/", methods=['GET','POST'])
 def main_page(page=1):
     form = AddProduct()
-    per_page = 30
-    paginate_products = Product.query.paginate(page=int(page),per_page=per_page, error_out=False)
-    
+    per_page = 30  
     searched_product = request.args.get("searched", "").strip()
     
     if searched_product:
         paginate_products = Product.query.filter(Product.product_name.ilike(f"%{searched_product}%")).paginate(page=int(page), per_page=per_page, error_out=False)
-        if paginate_products.first:
+        if paginate_products.items:
             flash(f"Showing produts with '{searched_product}' keyword in them", category="success")
         else:
             flash(f"No products found with '{searched_product}' keyword in them", category="danger")
+    else: 
+        paginate_products = Product.query.paginate(page=int(page), per_page=per_page, error_out=False)
         
     if request.method == "POST":
         if current_user.is_authenticated:
@@ -40,14 +37,14 @@ def main_page(page=1):
         else:
             flash("Cannot add the product to the cart! Login required", category="danger")
             return redirect(url_for('login_page'))
-        
-        
-    return render_template('index.html', products=paginate_products.items, pagination=paginate_products,form=form, cart_items_count=cart_item_count())
+              
+    return render_template('index.html', products=paginate_products.items, pagination=paginate_products, form=form, cart_items_count=cart_item_count())
 
 @app.route("/orders", methods=['GET','POST'])
 @login_required
 def order_page():
     ordered_items = db.session.query(Order).options(joinedload(Order.product)).filter(Order.username == current_user.username).all()
+    
     items = [
         {
             'id': ordered_item.id,
@@ -59,14 +56,15 @@ def order_page():
             'delivery_date': ordered_item.delivery_date,
             'order_date': ordered_item.order_date,
             'shipping_cost': ordered_item.shipping_cost,
-        } for ordered_item in ordered_items ]
+        } for ordered_item in ordered_items 
+            ]
     
     selected_option = request.form.get('action') 
     if selected_option == "buy-agian":
         product_to_buy_agian = Cart(username=current_user.username,
                                       product_id=request.form.get('id'),
                                       quantity=1
-                                      )
+                                    )
         db.session.add(product_to_buy_agian)
         db.session.commit()
         flash(f"The product was added to cart!", category="success")
@@ -95,7 +93,7 @@ def cart_page():
             'shipping_cost': cart_item.shipping_cost,
             'total_tax': int(cart_item.quantity * cart_item.product.selling_price * 0.1)
         } for cart_item in cart_items 
-                ]
+            ]
        
     selected_option = request.form.get('option') 
     action = request.form.get('action') 
@@ -141,7 +139,7 @@ def cart_page():
                                                 delivery_date=product.delivery_date,
                                                 order_date=datetime.now().date(),
                                                 shipping_cost=product.shipping_cost,                           
-                        )
+                                                )
                         current_user.buget -= total_price
                         db.session.add(product_to_order)
                         db.session.delete(product)
@@ -161,7 +159,8 @@ def register_page():
     if form.validate_on_submit():
         user_to_add = User(username=form.username.data, 
                            email=form.email.data,
-                           password=form.password1.data)
+                           password=form.password1.data
+                          )
         db.session.add(user_to_add)
         db.session.commit()
         flash(f"Registration successfull! You are logged in as {form.username.data}", category="success")

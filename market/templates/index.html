@@ -47,13 +47,17 @@ Amazon Project
 </div>
 <div class="pagination">
     {% if pagination.has_prev %}
-        <a href="{{ url_for('main_page', page=pagination.prev_num) }}" class="pagination-link"><button class="pagination-button previous-button">Previous</button></a>
+        <a href="{{ url_for('main_page', page=pagination.prev_num, searched=request.args.get('searched', '')) }}" class="pagination-link">
+            <button class="pagination-button previous-button">Previous</button>
+        </a>
     {% endif %}
     
     <span>Page {{ pagination.page }} of {{ pagination.pages }}</span>
 
     {% if pagination.has_next %}
-        <a href="{{ url_for('main_page', page=pagination.next_num) }}" class="pagination-link"><button class="pagination-button next-button">Next</button></a>
+        <a href="{{ url_for('main_page', page=pagination.next_num, searched=request.args.get('searched', '')) }}" class="pagination-link">
+            <button class="pagination-button next-button">Next</button>
+        </a>
     {% endif %}
 </div>
 
