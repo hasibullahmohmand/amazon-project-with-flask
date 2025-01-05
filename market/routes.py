@@ -10,9 +10,9 @@ with app.app_context():
     products = Product.query.all()
 
     
-@app.route("/", methods=['GET','POST'])
-@app.route("/products/<page>", methods=['GET','POST'])
+@app.route("/products/<page>/", methods=['GET','POST'])
 @app.route('/search', methods=['GET','POST'])
+@app.route("/", methods=['GET','POST'])
 def main_page(page=1):
     form = AddProduct()
     per_page = 30
@@ -62,7 +62,6 @@ def order_page():
         } for ordered_item in ordered_items ]
     
     selected_option = request.form.get('action') 
-    product_id = request.form.get('id')
     if selected_option == "buy-agian":
         product_to_buy_agian = Cart(username=current_user.username,
                                       product_id=request.form.get('id'),
@@ -185,7 +184,8 @@ def login_page():
             if attempted_user and attempted_user.check_password_correction(attempted_password=form.password.data): 
                 login_user(attempted_user)
                 flash(f"Login successfull! Welcome back {attempted_user.username}", category="success")
-                return redirect(url_for("main_page"))
+                next_page = request.args.get('next')
+                return redirect(next_page) if next_page else redirect(url_for("main_page"))
             else:
                 flash("Wrong username or password! Please check your username or password", category="danger")
         
@@ -225,5 +225,3 @@ def cart_item_count():
 app.jinja_env.filters['sumT'] = sumT
 app.jinja_env.filters['sumShip'] = sumShip
 app.jinja_env.filters['sumTT'] = sumTT
-
-
